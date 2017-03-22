@@ -202,7 +202,7 @@ public class BrandStat{
 		if(branddescription==null) return;
 		
 		if (branddescription.indexOf("Apple")!=-1||branddescription.indexOf("APPLE")!=-1) { _bi.apple++; }
-		else if (branddescription.indexOf("Samsung")!=-1||branddescription.indexOf("SAMSUNG")!=-1) { ;_bi.samsung++;}
+		else if (branddescription.indexOf("Samsung")!=-1||branddescription.indexOf("SAMSUNG")!=-1) { _bi.samsung++;}
 		else if (branddescription.indexOf("Nokia")!=-1||branddescription.indexOf("NOKIA")!=-1) { _bi.other++; _bi.nokia++;}
 		else if (branddescription.indexOf("Sony")!=-1||branddescription.indexOf("SONY")!=-1) {_bi.other++;_bi.sony++;}					
 		else if (branddescription.indexOf("huawei")!=-1||branddescription.indexOf("HUAWEI")!=-1) {_bi.huawei++;}
@@ -215,7 +215,7 @@ public class BrandStat{
 		else if (branddescription.indexOf("XIAOMI")!=-1||branddescription.indexOf("Xiaomi")!=-1) {_bi.xiaomi++;}
 		else if (branddescription.indexOf("MEIZU")!=-1) {_bi.meizu++;}
 		else if (branddescription.indexOf("LG")!=-1) {_bi.other++;_bi.lg++;}
-		else if (branddescription.indexOf("Lenovo Mobile")!=-1 || branddescription.indexOf("Motorola Mobility") == -1) {_bi.other++;_bi.lenovo++;}
+		else if (branddescription.indexOf("Lenovo Mobile")!=-1 || branddescription.indexOf("Motorola Mobility") != -1) {_bi.other++;_bi.lenovo++;}
 		else if (branddescription.indexOf("Yulong")!=-1) {_bi.coolpad++;}
 		else if (branddescription.indexOf("BBK")!=-1) {_bi.other++;_bi.bbk++;}
 		else if (branddescription.indexOf("TP-LINK")!=-1) {_bi.other++;_bi.tp_link++;}
