@@ -19,14 +19,14 @@ exit 0
 
 **作用**
 
-* TotalInfo.jar **activity.jsp** **goandcome.jsp**
+* TotalInfo.jar
 
 1. 与表**totalinfo**有关，统计每一个监测组有多少个手机mac，表totalinfo统计的是每天各个groupid监测到的手机数量；
 2. 与表**activity**有关，将星期几、时间和计算出的活跃度插入到表activity；
 3. 与表**activityinday**有关，将每个小时所有监测点的活跃度都插入到表activityinday；
 4. 与表**goandcome**有关，统计每天每个门的出入人流量;
 
-* BrandStat.jar **consumption.jsp**
+* BrandStat.jar
 
 1. 统计各品牌手机的数量分布，它关联的是数据库中的**branddis**表，branddis表中统计的是每天监测到的各品牌手机数量。
 
@@ -52,7 +52,7 @@ java -jar /home/wibupt/TraceMap.jar root root /home/data/scandata/ $filename $to
 
 **作用**
 
-* TraceMap.jar **gephi.jsp**
+* TraceMap.jar
 
 1. 与表**edges**有关，生成svg图
 
@@ -60,7 +60,7 @@ java -jar /home/wibupt/TraceMap.jar root root /home/data/scandata/ $filename $to
 
 **作用**
 
-* RealTime.jar **heatmap.jsp**
+* RealTime.jar
 
 1. 每隔5分钟运行一次 run()方法；
 2. 与表realtimedata_in有关，统计每个分组5分钟内的流量；
@@ -71,7 +71,7 @@ java -jar /home/wibupt/TraceMap.jar root root /home/data/scandata/ $filename $to
 2. 与表visitrecord有关，统计的数据最全面，统计了每个手机接入监测点的时间，离开时间，逗留时间及手机的Mac地址，接入的监测点的Mac地址
 
 
-#### 4. RealGate进程，需要改写 **goandcome.jsp**
+#### 4. RealGate进程
 
 **作用**
 
