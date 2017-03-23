@@ -19,16 +19,16 @@ exit 0
 
 **作用**
 
-* TotalInfo.jar
+* TotalInfo.jar **activity.jsp** **goandcome.jsp**
 
-1. 与表totalinfo有关，统计每一个监测群有多少个手机mac，表totalinfo统计的是每天各个groupid监测到的手机数量；
-2. 与表activity有关，将星期几、时间和计算出的活跃度插入到表activity；
-3. 与表activityinday有关，将每个小时所有监测点的活跃度都插入到表activityinday；
-4. 与表goandcome有关，统计每天每个门的出入人流量;
+1. 与表**totalinfo**有关，统计每一个监测组有多少个手机mac，表totalinfo统计的是每天各个groupid监测到的手机数量；
+2. 与表**activity**有关，将星期几、时间和计算出的活跃度插入到表activity；
+3. 与表**activityinday**有关，将每个小时所有监测点的活跃度都插入到表activityinday；
+4. 与表**goandcome**有关，统计每天每个门的出入人流量;
 
-* BrandStat.jar
+* BrandStat.jar **consumption.jsp**
 
-统计各品牌手机的数量分布，它关联的是数据库中的branddis表，branddis表中统计的是每天监测到的各品牌手机数量，在网站上体现为Consumption.jsp。
+1. 统计各品牌手机的数量分布，它关联的是数据库中的**branddis**表，branddis表中统计的是每天监测到的各品牌手机数量。
 
 #### 2. 每隔30分钟运行一次gephi脚本，该脚本内容如下，运行了TraceMap进程。
 
@@ -52,22 +52,38 @@ java -jar /home/wibupt/TraceMap.jar root root /home/data/scandata/ $filename $to
 
 **作用**
 
-* TraceMap.jar
+* TraceMap.jar **gephi.jsp**
 
-与表edges有关，生成svg图，与之关联的是gephi.jsp页面
+1. 与表**edges**有关，生成svg图
 
 #### 3. 有两个常驻进程，分别是RealTime和VisitRecord。
 
 **作用**
 
-* RealTime.jar
+* RealTime.jar **heatmap.jsp**
 
-
+1. 每隔5分钟运行一次 run()方法；
+2. 与表realtimedata_in有关，统计每个分组5分钟内的流量；
+3. 与表heatmap有关，统计每个分组5分钟内的流量
 
 * VisitRecord.jar
+1. 每隔5分钟统计一次数据
+2. 与表visitrecord有关，统计的数据最全面，统计了每个手机接入监测点的时间，离开时间，逗留时间及手机的Mac地址，接入的监测点的Mac地址
 
-4. 还有一个进程， RealGate
+
+#### 4. RealGate进程，需要改写 **goandcome.jsp**
 
 **作用**
 
+1. 与表realgate有关，统计的是5分钟内各个门的人流量；
+
 ### 后台进程 --- 数据库 --- 网页 的对应关系
+
+|后台进程      |      数据库表   |    网页   |
+|---------     | -----------     | -----------|
+| TotalInfo    | totalinfo, activity, activityinday, goandcome | activity.jsp, goandcome.jsp |
+| BrandStat    | branddis                                      | consumption.jsp             |
+| TraceMap     | edges                                         | gephi.jsp                   |
+| Realtime     | realtimedata_in, heatmap                      | heatmap.jsp                 |
+| VisitRecord  | visitrecord                                   | none                        |
+| RealGate     | realgate                                      | goandcome.jsp               |
