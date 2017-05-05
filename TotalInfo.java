@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   TotalInfo.java
 
-package com.wibupt.totalinfo;
+package totalinfo;
 
 import java.io.*;
 import java.sql.*;
@@ -36,7 +36,8 @@ public class TotalInfo
 
 
 	private static Logger logger = LogManager.getLogger(TotalInfo.class
-			.getName());	public static final String DBDRIVER = "com.mysql.jdbc.Driver";
+			.getName());	
+	public static final String DBDRIVER = "com.mysql.jdbc.Driver";
 	public static final String DBURL = "jdbc:mysql://localhost:3306/wibupt";
 	private static Connection conn = null;
 	public File datafolder;
@@ -217,7 +218,7 @@ logger.info("torun - Begin to insert into activityinday " + daytime);
 			for (int i = 0; i < 24; i++)
 			{
 				Statement st0 = conn.createStatement();
-				st0.execute((new StringBuilder("REPLACE INTO  activityinday  VALUES('")).append(daytime).append("','").append(i).append("','").append(everymonCountperhour[i]).append("')").toString());
+				st0.execute((new StringBuilder("REPLACE INTO activityinday VALUES('")).append(daytime).append("','").append(i).append("','").append(everymonCountperhour[i]).append("')").toString());
 				daytime += 3600L;
 			}
 logger.info("torun - Finish to insert into activityinday " + daytime);
@@ -355,12 +356,17 @@ logger.info("torun - Finish to insert into activityinday " + daytime);
 		long start = daytime;
 		long end = daytime + 0x15180L;
 		String sql1 = (new StringBuilder("SELECT mac,intime FROM visitrecord WHERE monid = ?  and intime>='")).append(start).append("' and intime<='").append(end).append("'").toString();
-		HashMap gatemap = new HashMap();		
+		HashMap gatemap = new HashMap();	
+		
+		String[] westMacs = {"14E4E6E17648", "14E4E6E176C8"}; // teaching building 4
+		String[] eastMacs = {"0C8268F9314E", "0C8268F15C64"}; // student apartment 29
+		String[] middleMacs = {"388345A236BE", "5C63BFD90AE2"}; // teaching building 3
+		String[] northMacs = {"0C8268C7D504", "0C8268F90E64"}; // student apartment 10 south entrance
 
-		gatemap.put("west", new GateCount("14E4E6E17648", "14E4E6E176C8"));  //½Ì4
-		gatemap.put("east", new GateCount("0C8268F9314E", "0C8268F15C64"));  //Ñ§29
-		gatemap.put("middle", new GateCount("14E4E6E14460", "14E6E4E142A8"));//½Ì3
-		gatemap.put("north", new GateCount("0C8268C7D504", "0C8268F90E64"));//Ñ§10ÄÏÃÅ
+		gatemap.put("west", new GateCount(westMacs[0], westMacs[1]));
+		gatemap.put("east", new GateCount(eastMacs[0], eastMacs[1]));  
+		gatemap.put("middle", new GateCount(middleMacs[0], middleMacs[1]));
+		gatemap.put("north", new GateCount(northMacs[0], northMacs[1]));
 
 		try
 		{
@@ -471,7 +477,7 @@ logger.info("torun - Finish to insert into activityinday " + daytime);
 
 	public long getgelin(String user_time)
 	{
-logger.info("begin to getgelin:" + user_time);
+        logger.info("begin to getgelin:" + user_time);
 		TimeZone.setDefault(TimeZone.getTimeZone("GMT+8:00"));
 		long re_time = 0L;
 		String re_time1 = null;
@@ -549,7 +555,7 @@ logger.info("end to getgelin" + re_time);
 			String passwd = args[1]; // db passwd
 			String datapath = args[2];// dataPath,eg."D:\\data"
 			String day;// day,"20140525"
-			if (args[3].equals("yesterday")) { // yesterday±íÊ¾Ö»´¦Àí×òÌìµÄ£¬20140711±íÊ¾Ö»´¦Àí¸ÃÌìµÄÊý¾Ý
+			if (args[3].equals("yesterday")) { // yesterdayï¿½ï¿½Ê¾Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½20140711ï¿½ï¿½Ê¾Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				day = ti.getYestoday();
 			} else {
 				day = args[3];

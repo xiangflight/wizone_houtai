@@ -1,7 +1,7 @@
-package com.wibupt.goandcome;
-/*³ÌÐò¹¦ÄÜ£ºÍ³¼Æµ±ÌìÐ£Ô°»îÔ¾¶È£»½á¹û²åÈëµ½DBÖÐ±íactivityÖÐ
- *       Í³¼Æµ±Ìì¶«¡¢ÖÐ¡¢Î÷¡¢±±ËÄ¸öÃÅÃ¿ÌìµÄ½ø£¬³öÈË´Î£»½á¹û²åÈëµ½DBÖÐ±ígoandcomeÖÐ
- *³ÌÐòÔËÐÐÆµÂÊ£ºÃ¿ÌìÒ»´Î
+package realgate;
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ü£ï¿½Í³ï¿½Æµï¿½ï¿½ï¿½Ð£Ô°ï¿½ï¿½Ô¾ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ½DBï¿½Ð±ï¿½activityï¿½ï¿½
+ *       Í³ï¿½Æµï¿½ï¿½ì¶«ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ä½ï¿½ï¿½ï¿½Ë´Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ½DBï¿½Ð±ï¿½goandcomeï¿½ï¿½
+ *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ê£ï¿½Ã¿5ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
  * */
 import java.io.File;
 import java.sql.Connection;
@@ -25,15 +25,15 @@ import org.apache.logging.log4j.Logger;
 public class RealGate {
 	private static Logger logger = LogManager.getLogger(RealGate.class.getName());
 
-	public static final String DBDRIVER = "com.mysql.jdbc.Driver"; // ¶¨ÒåÊý¾Ý¿âÇý¶¯³ÌÐò
-	public static final String DBURL = "jdbc:mysql://localhost:3306/wibupt"; // ¶¨ÒåÊý¾Ý¿âÁ¬½ÓµØÖ·
-	private static Connection conn = null; // ÉùÃ÷¾²Ì¬µÄConnection¶ÔÏó
+	public static final String DBDRIVER = "com.mysql.jdbc.Driver"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public static final String DBURL = "jdbc:mysql://localhost:3306/wibupt"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Óµï¿½Ö·
+	private static Connection conn = null; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½Connectionï¿½ï¿½ï¿½ï¿½
 
 	public class GateCount {
-		String inside; // ´ËÃÅÐ£ÄÚµÄÂ·ÓÉÆ÷µÄid
-		String outside; // ´ËÃÅÐ£ÍâµÄÂ·ÓÉÆ÷µÄid
-		int come; // ½øÈëÐ£ÃÅµÄÈËÊý
-		int go; // ³öÈ¥Ð£ÃÅµÄÈËÊý
+		String inside; // ï¿½ï¿½ï¿½ï¿½Ð£ï¿½Úµï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+		String outside; // ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+		int come; // ï¿½ï¿½ï¿½ï¿½Ð£ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½
+		int go; // ï¿½ï¿½È¥Ð£ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½
 
 		public GateCount(String in, String out) {
 			this.inside = in;
@@ -56,83 +56,87 @@ public class RealGate {
 		return conn;
 	}
 
-	public File datafolder; // ´æ´¢Ô­Ê¼ÎÄ¼þµÄ×ÜÄ¿Â¼
-	public File[] monfolders; // Ô­Ê¼ÎÄ¼þ×ÜÄ¿Â¼ÏÂµÄ×ÓÄ¿Â¼£¬¼´¸÷¸ö¼à²âµãµÄÊý¾ÝÎÄ¼þ¼Ð
+	public File datafolder; // ï¿½æ´¢Ô­Ê¼ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
+	public File[] monfolders; // Ô­Ê¼ï¿½Ä¼ï¿½ï¿½ï¿½Ä¿Â¼ï¿½Âµï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	public String day;
 
 	public void init(String _day) {
 		day = _day;
 	}
 	
-	// torunº¯ÊýÄÚÖ÷ÒªÍê³É¹¦ÄÜ£º¼ÆËã¸÷¸öÐ£ÃÅµÄ½ø³öÈËÊý
-		public void torun() {
-			long daytime = getgelin(day);
-			HashMap<String, GateCount> gates = getgate(daytime);
-			String sql1 = "INSERT INTO realgate (time, gateid,alldata) VALUES(?,?,?)";
+	// torunï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½É¹ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ÅµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void torun() {
+		long daytime = getgelin(day);
+		HashMap<String, GateCount> gates = getgate(daytime);
+		String sql1 = "INSERT INTO realgate (time, gateid,alldata) VALUES(?,?,?)";
 
-			// ½«»îÔ¾¶ÈÖµºÍ½ø³öÐ£ÃÅÈËÊýµÄ½á¹û²åÈëµ½Êý¾Ý¿âÖÐ
-			try {
-				PreparedStatement pre1 = conn.prepareStatement(sql1);
-				Iterator<Entry<String, GateCount>> it = gates.entrySet().iterator();
-				while (it.hasNext()) {
-					Entry<String, GateCount> en = it.next();
-					String gateid = en.getKey();
-					int go = en.getValue().go;
-					int come = en.getValue().come;
-					int all=go+come;
-					pre1.setLong(1, daytime);
-					pre1.setString(2, gateid);
-					pre1.setInt(3, all);
-					pre1.executeUpdate();
-					logger.info("insert into goandcome: time,gateid,alldata "
-							+ daytime + " , " + come + " , " + go + "," + gateid + ".");
+		// ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Öµï¿½Í½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
+		try {
+			PreparedStatement pre1 = conn.prepareStatement(sql1);
+			Iterator<Entry<String, GateCount>> it = gates.entrySet().iterator();
+			while (it.hasNext()) {
+				Entry<String, GateCount> en = it.next();
+				String gateid = en.getKey();
+				int go = en.getValue().go;
+				int come = en.getValue().come;
+				int all=go+come;
+				pre1.setLong(1, daytime);
+				pre1.setString(2, gateid);
+				pre1.setInt(3, all);
+				pre1.executeUpdate();
+				logger.info("insert into realgate: time,gateid,alldata "
+						+ daytime + " , " + gateid + " , " + all + ".");
 
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				logger.error(e1.getMessage());
 			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			logger.error(e1.getMessage());
 		}
+	}
 
-	// »ñÈ¡Ã¿¸öÐ£ÃÅµÄ½ø³öÈËÊý£¬inside ´ú±íÐ£ÄÚµÄÂ·ÓÉÆ÷£¬outside´ú±íÐ£ÍâµÄÂ·ÓÉÆ÷
+	// ï¿½ï¿½È¡Ã¿ï¿½ï¿½Ð£ï¿½ÅµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½inside ï¿½ï¿½ï¿½Ð£ï¿½Úµï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½outsideï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½
 	public HashMap<String, GateCount> getgate(long daytime) {
-		long start = daytime;
-		long end = daytime + 5*60;
-		String sql1 = "SELECT mac,intime FROM visitrecord WHERE monid = ?  and intime>='"
-				+ start + "' and intime<='" + end + "'";
-        //²âÊÔµÄÊ±ºò£¬ÓÉÓÚÔ­Ê¼Êý¾ÝÏÞÖÆ£¬ÏÈ²âÒ»¸öÃÅµÄ
+		long start = daytime - 5 * 60;
+		long end = daytime;
+		String sql1 = "SELECT mac,inTime FROM (SELECT * FROM visitrecord ORDER BY id DESC LIMIT 200000) AS subvisitrecord" +
+				" WHERE monid = ? AND inTime BETWEEN ? AND ?";
+        //ï¿½ï¿½ï¿½Ôµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½È²ï¿½Ò»ï¿½ï¿½ï¿½Åµï¿½
 		HashMap<String, GateCount> gatemap = new HashMap<String, GateCount>();
 //		gatemap.put("west", new GateCount("westInside", "westOutside"));
 //		gatemap.put("east", new GateCount("eastInside", "eastOutside"));
 //		gatemap.put("middle", new GateCount("middleInside", "middleOutside"));
 //		gatemap.put("north", new GateCount("northInside", "northOutside"));
 		
-		gatemap.put("west", new GateCount("14E4E6E17648", "14E4E6E176C8"));  //½Ì4
-		gatemap.put("east", new GateCount("eastInside", "eastOutside"));
-		gatemap.put("middle", new GateCount("14E4E6E14460", "14E6E4E142A8"));//½Ì3
-		gatemap.put("north", new GateCount("14E4E6E1738C", "14E4E6E186A4"));//¿ÆÑÐÂ¥
+		String[] westMacs = {"14E4E6E17648", "14E4E6E176C8"}; // teaching building 4
+		String[] eastMacs = {"0C8268F9314E", "0C8268F15C64"}; // student apartment 29
+		String[] middleMacs = {"388345A236BE", "5C63BFD90AE2"}; // teaching building 3
+		String[] northMacs = {"0C8268C7D504", "0C8268F90E64"}; // student apartment 10 south entrance
+		
+		gatemap.put("west", new GateCount(westMacs[0], westMacs[1]));  
+		gatemap.put("east", new GateCount(eastMacs[0], eastMacs[1]));
+		gatemap.put("middle", new GateCount(middleMacs[0], middleMacs[1]));
+		gatemap.put("north", new GateCount(northMacs[0], northMacs[1]));
         
 		try {
 			PreparedStatement pre1 = conn.prepareStatement(sql1);
 			PreparedStatement pre2 = conn.prepareStatement(sql1);
-			// Öð¸ö´¦ÀíÃ¿¸öÐ£ÃÅ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ð£ï¿½ï¿½
 			Iterator<Entry<String, GateCount>> gateit = gatemap.entrySet()
 					.iterator();
 			while (gateit.hasNext()) {
 				int comevalue = 0;
 				int govalue = 0;
 				Entry<String, GateCount> gateentry = gateit.next();
-				// 1£¬»ñÈ¡´ËÃÅµÄÐ£ÄÚºÍÐ£ÍâµÄÁ½¸öÂ·ÓÉÆ÷µÄid
+				// 1ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Åµï¿½Ð£ï¿½Úºï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 				String inside = gateentry.getValue().inside;
 				String outside = gateentry.getValue().outside;
-
-				// 2,´ÓDBµÄvisitrecordÖÐÈ¡Êý¾Ý,»ñÈ¡Ð£ÄÚºÍÐ£ÍâµÄÂ·ÓÉµÄµ±ÌìµÄmacÓëintime
+				// 2,ï¿½ï¿½DBï¿½ï¿½visitrecordï¿½ï¿½È¡ï¿½ï¿½ï¿½,ï¿½ï¿½È¡Ð£ï¿½Úºï¿½Ð£ï¿½ï¿½ï¿½Â·ï¿½ÉµÄµï¿½ï¿½ï¿½ï¿½macï¿½ï¿½intime
 				HashMap<String, ArrayList<Integer>> insidemap = new HashMap<String, ArrayList<Integer>>();
 				HashMap<String, ArrayList<Integer>> outsidemap = new HashMap<String, ArrayList<Integer>>();
 				pre1.setString(1, inside);
-				pre2.setString(1, outside);
+				pre1.setLong(2, start);
+				pre1.setLong(3, end);
 				ResultSet rs1 = pre1.executeQuery();
-				ResultSet rs2 = pre2.executeQuery();
 				while (rs1.next()) {
 					String mac = rs1.getString(1);
 					Integer intime = rs1.getInt(2);
@@ -144,6 +148,10 @@ public class RealGate {
 						insidemap.put(mac, intimelist);
 					}
 				}
+				pre2.setString(1, outside);
+				pre2.setLong(2, start);
+				pre2.setLong(3, end);
+				ResultSet rs2 = pre2.executeQuery();
 				while (rs2.next()) {
 					String mac = rs2.getString(1);
 					Integer intime = rs2.getInt(2);
@@ -155,20 +163,19 @@ public class RealGate {
 						outsidemap.put(mac, intimelist);
 					}
 				}
-				// 3,ÕÒ³öÐ£ÄÚºÍÐ£ÍâÖØºÏµÄmac £¬²¢ÅÐ¶ÏÆä½ø³ö
+				// 3,ï¿½Ò³ï¿½Ð£ï¿½Úºï¿½Ð£ï¿½ï¿½ï¿½ØºÏµï¿½mac ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
 				/*
-				 * ÅÐ¶Ï·½·¨£º Ð£ÄÚÂ·ÓÉÂ·ÓÉÆ÷µÄintimeºÍÐ£ÍâÂ·ÓÉÆ÷µÄintimeµÄ¾ø¶ÔÖµ²»³¬¹ý300sec
-				 * ÈôÐ£ÄÚintime´óÓÚÐ£Íâintime ÔòÅÐ¶ÏÎª½øÈë ÈôÐ£ÄÚintimeÐ¡ÓÚÐ£Íâintime ÔòÅÐ¶ÏÎª³öÈ¥
+				 * ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ Ð£ï¿½ï¿½Â·ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½intimeï¿½ï¿½Ð£ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½intimeï¿½Ä¾ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½300sec
+				 * ï¿½ï¿½Ð£ï¿½ï¿½intimeï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½intime ï¿½ï¿½ï¿½Ð¶ï¿½Îªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð£ï¿½ï¿½intimeÐ¡ï¿½ï¿½Ð£ï¿½ï¿½intime ï¿½ï¿½ï¿½Ð¶ï¿½Îªï¿½ï¿½È¥
 				 */
 				Iterator<Entry<String, ArrayList<Integer>>> init = insidemap
 						.entrySet().iterator();
 				// Iterator<Entry<String,ArrayList<Integer>>> outit =
 				// outsidemap.entrySet().iterator();
-
 				while (init.hasNext()) {
 					Entry<String, ArrayList<Integer>> entry = init.next();
 					String mac = entry.getKey();
-					// ÕÒµ½ÖØºÏµÄmac
+					// ï¿½Òµï¿½ï¿½ØºÏµï¿½mac
 					if (outsidemap.containsKey(mac)) {
 						ArrayList<Integer> inlist = entry.getValue();
 						ArrayList<Integer> outlist = outsidemap.get(mac);
@@ -178,7 +185,7 @@ public class RealGate {
 							for (int j = 0; j < outlist.size(); j++) {
 								int diff = Math.abs(inlist.get(i)
 										- outlist.get(j));
-								// È¡ÔÚ300Ãë·¶Î§ÄÚ£¬ÇÒÊ±¼ä²î×îÐ¡µÄÒ»¸ö
+								// È¡ï¿½ï¿½300ï¿½ë·¶Î§ï¿½Ú£ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ò»ï¿½ï¿½
 								if (diff < 300) {
 									if (diff < min) {
 										min = diff;
@@ -204,31 +211,31 @@ public class RealGate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return gatemap;
 	}
 
 	
-	// ½«×Ö·û´®×ªÎªÊ±¼ä´Á
-			// 20140712 xx:xx:xx --> ÀàËÆ1405814899µÄÊý×Ö
-		 public long getgelin(String user_time) { 
-				long re_time = 0; 
-				String re_time1 = null; 
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd hh:mm:ss"); 
-				Date d; 
-				try { 
-					d = sdf.parse(user_time); 
-					long l = d.getTime(); 
-					String str = String.valueOf(l); 
-					re_time1 = str.substring(0, 10); 
-					re_time =Long.parseLong(re_time1);
-				} catch (ParseException e) { 
-					logger.error(e.getMessage());
-				} 
-				return  re_time;
-			} 
+	// ï¿½ï¿½ï¿½Ö·ï¿½×ªÎªÊ±ï¿½ï¿½ï¿½
+			// 20140712 xx:xx:xx --> ï¿½ï¿½ï¿½ï¿½1405814899ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public long getgelin(String user_time) { 
+		long re_time = 0; 
+		String re_time1 = null; 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd hh:mm:ss"); 
+		Date d; 
+		try { 
+			d = sdf.parse(user_time); 
+			long l = d.getTime(); 
+			String str = String.valueOf(l); 
+			re_time1 = str.substring(0, 10); 
+			re_time =Long.parseLong(re_time1);
+		} catch (ParseException e) { 
+			logger.error(e.getMessage());
+		} 
+		return  re_time;
+	} 
 		 
 	public static void main(String[] args) {
+		logger.info("RealGate begin...");
 		try {
 			RealGate ti = new RealGate();
 			String user = args[0]; // db username

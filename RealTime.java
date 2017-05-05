@@ -1,4 +1,4 @@
-package com.wibupt.realtime;
+package realtime;
 
 //实时人流量 在DB 中的数据格式为：monid, time, traffic
 //例如，5C63BF7676FC, 1400640300, 5，标识1400640300之前300秒内该监测点的人流量为5
@@ -63,16 +63,14 @@ public class RealTime {
 	//public File datafolder; // 存储原始文件的总目录
 	//public File[] monfolders; // 原始文件总目录下的子目录，即各个监测点的数据文件夹
 	public int statinterval; // 统计间隔，通常为每5分钟（300秒）生成一个实时人流量数据
-	public int sleeptime; // 扫描间隔时间，通常为每5分钟（300秒）
 	public String datafilepath; // 存储原始文件的路径的字符串
 	public String datetodeal;
 
-	public void init(String _datapath, int _datainterval, int _scaninterval,
+	public void init(String _datapath, int _datainterval,
 			String _date) {
 		datafilepath = _datapath; // 存放所有监测点原始数据文件的总目录
 		statinterval = _datainterval; // 每隔 statinterval
 										// 秒的时间，生成一个流量数据（statinterval间隔时间内的MAC地址数）
-		sleeptime = _scaninterval; // 两次扫描中间间隔的时间
 		datetodeal = _date; // today or yyyyMMdd, like 20140702
 	}
 
@@ -424,16 +422,16 @@ public class RealTime {
 		String dbpasswd = args[1];
 		String datapath = args[2];
 		int datainterval = Integer.parseInt(args[3]);
-		int scaninterval = Integer.parseInt(args[4]);
-		String __date = args[5];
+//		int scaninterval = Integer.parseInt(args[4]);
+		String __date = args[4];
 
 		logger.info("Your input information is:");
 		logger.info("    Mysql user: " + args[0]);
 		logger.info("    Mysql passwd: " + args[1]);
 		logger.info("    datapath: " + args[2]);
 		logger.info("    data interval: " + args[3] + " seconds");
-		logger.info("    scan interval: " + args[4] + " seconds");
-		logger.info("    date: " + args[5]); // today or like 20140712(to delete
+//		logger.info("    scan interval: " + args[4] + " seconds");
+		logger.info("    date: " + args[4]); // today or like 20140712(to delete
 												// all visitrecord data of that
 												// day and regenerate it again)
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -447,22 +445,22 @@ public class RealTime {
 			logger.info("Database connection successful!!  "
 					+ df.format(new Date()));
 
-			rt.init(datapath, datainterval, scaninterval, __date);
+			rt.init(datapath, datainterval, __date);
 			if (__date.equals("today")) {
 				logger.info("Init finished!!! Begin to analysis data on "
 						+ df.format(new Date()));
-				while (true) {
+//				while (true) {
 					rt.torun();
-					try {
-						logger.info("NOW is " + df.format(new Date())
-								+ " @@@To sleep " + scaninterval
-								+ " seconds...");
-						Thread.sleep(scaninterval * 1000); // 每隔 scaninterval
-															// 秒，运行1次
-					} catch (InterruptedException e) {
-						logger.error(e.getMessage());
-					}
-				}
+//					try {
+//						logger.info("NOW is " + df.format(new Date())
+//								+ " @@@To sleep " + scaninterval
+//								+ " seconds...");
+//						Thread.sleep(scaninterval * 1000); // 每隔 scaninterval
+//															// 秒，运行1次
+//					} catch (InterruptedException e) {
+//						logger.error(e.getMessage());
+//					}
+//				}
 			} else {
 				logger.info("Init finished!!! Begin to analysis data on "
 						+ __date);
