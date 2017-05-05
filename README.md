@@ -1,7 +1,25 @@
 # wizone_houtai
-wibupt后台的数据处理代码
 
 ### 详细介绍
+
+****
+
+#### 运行
+
+使用Linux的cron机制定时循环运行这些jar包，具体如下：
+
+```
+$crontab -l 
+
+00 01 * * * /home/wibupt/wibupt_everyday
+1,6,11,16,21,26,31,36,41,46,51,56 * * * * /home/wibupt/wirealtime
+2,7,12,17,22,27,32,37,42,47,52,57 * * * * /home/wibupt/visitrecord
+3,8,13,18,23,28,33,38,43,48,53,58 * * * * /home/wibupt/realgate
+*/30 * * * * /home/wibupt/gephi
+
+```
+
+****
 
 #### 1. 每隔一天运行wibupt_everyday脚本，该脚本的内容如下，运行了TotalInfo和BrandStat两个进程。
 
@@ -28,7 +46,9 @@ exit 0
 
 * BrandStat.jar
 
-1. 统计各品牌手机的数量分布，它关联的是数据库中的**branddis**表，branddis表中统计的是每天监测到的各品牌手机数量。
+- 统计各品牌手机的数量分布，它关联的是数据库中的**branddis**表，branddis表中统计的是每天监测到的各品牌手机数量。
+
+****
 
 #### 2. 每隔30分钟运行一次gephi脚本，该脚本内容如下，运行了TraceMap进程。
 
@@ -56,26 +76,65 @@ java -jar /home/wibupt/TraceMap.jar root root /home/data/scandata/ $filename $to
 
 1. 与表**edges**有关，生成svg图
 
-#### 3. 有两个常驻进程，分别是RealTime和VisitRecord。
+****
+
+#### 3. 每5分钟运行一次realtime, visitrecord和realgate脚本，分别运行RealTime、VisitRecord和RealGate三个进程
+
+```
+wirealtime
+
+#!/bin/sh
+#
+# description: Auto-starts dataimport
+# processname: dataimport
+
+java -jar /home/wibupt/RealTime.jar root root /home/data/scandata 300 today &
+exit 0
+
+------------------------------------------------------------------------
+visitrecord
+
+#!/bin/sh
+#
+# description: Auto-starts dataimport
+# processname: dwelltime
+
+
+java -jar /home/wibupt/VisitRecord.jar root root /home/data/scandata 1800 today &
+exit 0
+
+------------------------------------------------------------------------
+realgate
+
+#!/bin/bash
+RUN_HOME=/home/wibupt/
+CPATH1=$CPATH1:$RUN_HOME/mysql-connector-java-5.1.23.jar
+
+date1=$(date +%Y%m%d)
+time=$(date +%H:%M:%S)
+
+export CPATH1=$CPATH1
+
+java -jar /home/wibupt/RealGate.jar root root $date1 $time
+
+```
 
 **作用**
 
 * RealTime.jar
 
-1. 每隔5分钟运行一次 run()方法；
-2. 与表realtimedata_in有关，统计每个分组5分钟内的流量；
-3. 与表heatmap有关，统计每个分组5分钟内的流量
+1. 与表realtimedata_in有关，统计每个分组5分钟内的流量；
+2. 与表heatmap有关，统计每个分组5分钟内的流量
 
 * VisitRecord.jar
 1. 每隔5分钟统计一次数据
 2. 与表visitrecord有关，统计的数据最全面，统计了每个手机接入监测点的时间，离开时间，逗留时间及手机的Mac地址，接入的监测点的Mac地址
 
+* RealGate.jar
 
-#### 4. RealGate进程
+- 与表realgate有关，统计的是5分钟内各个门的人流量；
 
-**作用**
-
-1. 与表realgate有关，统计的是5分钟内各个门的人流量；
+****
 
 ### 后台进程 --- 数据库 --- 网页 的对应关系
 
